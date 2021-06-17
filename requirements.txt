@@ -1,2 +1,8 @@
 streamlit 
 pandas 
+accuracy_score
+train_test_split
+LogisticRegression
+RandomForestClassifier
+GradientBoostingClassifier
+KNeighborsClassifier
