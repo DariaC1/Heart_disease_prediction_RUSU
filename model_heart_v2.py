@@ -199,7 +199,7 @@ if button:
     # pošto je velik dataset treba vremena da učita i stoga je bolje da se nalazi tu
     # da se ne bi učitavalo svaki put kada bi se promijenila lista atributa i time znatno
     # usporio program 
-    heart_df = pd.read_csv ("D:/4.godina/Projekti/rusu/cardio_train.csv", index_col = 0 )
+    heart_df = pd.read_csv ("cardio_train.csv", index_col = 0 )
     
     X = heart_df.iloc[:, numbers]
     Y = heart_df.iloc[:, -1]
