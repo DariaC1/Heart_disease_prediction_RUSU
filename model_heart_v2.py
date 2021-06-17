@@ -38,6 +38,7 @@ def get_user_input():
         else:
             data = {'sex' : sex}
             features = pd.DataFrame(data, index = [0])
+            numbers.append(True)
     else: 
         numbers.append(False)
         
@@ -50,6 +51,7 @@ def get_user_input():
         else:
             data = {'height' : height}
             features = pd.DataFrame(data, index = [0])
+            numbers.append(True)
     else: 
         numbers.append(False)
   
@@ -62,6 +64,7 @@ def get_user_input():
         else:
             data = {'weight' : weight}
             features = pd.DataFrame(data, index = [0])
+            numbers.append(True)
     else: 
         numbers.append(False)
         
@@ -74,6 +77,7 @@ def get_user_input():
         else:
             data = {'ap_hi' : ap_hi}
             features = pd.DataFrame(data, index = [0])
+            numbers.append(True)
     else: 
         numbers.append(False)
 
@@ -86,6 +90,7 @@ def get_user_input():
         else:
             data = {'ap_lo' : ap_lo}
             features = pd.DataFrame(data, index = [0])
+            numbers.append(True)
     else: 
         numbers.append(False)
         
@@ -98,6 +103,7 @@ def get_user_input():
         else:
             data = {'cholesterol' : cholesterol}
             features = pd.DataFrame(data, index = [0])
+            numbers.append(True)
     else: 
         numbers.append(False)
         
@@ -110,6 +116,7 @@ def get_user_input():
         else:
             data = {'gluc' : gluc}
             features = pd.DataFrame(data, index = [0])
+            numbers.append(True)
     else: 
         numbers.append(False)
         
@@ -122,6 +129,7 @@ def get_user_input():
         else:
             data = {'smoke' : smoke}
             features = pd.DataFrame(data, index = [0])
+            numbers.append(True)
     else: 
         numbers.append(False)
         
@@ -134,6 +142,7 @@ def get_user_input():
         else:
             data = {'alco' : alco}
             features = pd.DataFrame(data, index = [0])
+            numbers.append(True)
     else: 
         numbers.append(False)
         
@@ -146,14 +155,15 @@ def get_user_input():
         else:
             data = {'active' : active}
             features = pd.DataFrame(data, index = [0])
+            numbers.append(True)
     else: 
         numbers.append(False)
              
     numbers.append(False)
-    return features, numbers
+    return features, numbers, data
 
 
-user_input, numbers = get_user_input()
+user_input, numbers, data = get_user_input()
 
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
@@ -199,34 +209,37 @@ if button:
     # pošto je velik dataset treba vremena da učita i stoga je bolje da se nalazi tu
     # da se ne bi učitavalo svaki put kada bi se promijenila lista atributa i time znatno
     # usporio program 
-    heart_df = pd.read_csv ("cardio_train.csv", index_col = 0 )
-    
-    X = heart_df.iloc[:, numbers]
-    Y = heart_df.iloc[:, -1]
-
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.25, random_state = 0)
-   
-    st.subheader('User Input:')
-    st.write(user_input)
-    st.subheader('Model Test Accuracy Score:')
-   
-    if (option == "Random Forest"):
-      prediction = RFC_fun(X_train, X_test, Y_train, Y_test)
-    elif (option == "Logistic Regression"):
-        prediction = LR_fun(X_train, X_test, Y_train, Y_test)
-    elif (option == "k-Nearest Neighbors"):
-        prediction = kN_fun(X_train, X_test, Y_train, Y_test)
-    elif (option == "Gradient Boosting"):
-        prediction = GBC_fun(X_train, X_test, Y_train, Y_test)
-
-    st.subheader('Classification result: ')
-    st.write('')
-    if (prediction == 0):
-        st.markdown("**Predicted that there is no cardiovascular disease.**")
+    if data == False:
+        st.markdown("**Please choose at least 1 attribute.**")
     else:
-        st.markdown("**Predicted that cardiovascular disease is present.**")
-    
-    st.write(prediction)   
+        heart_df = pd.read_csv ("cardio_train.csv", index_col = 0 )
+
+        X = heart_df.iloc[:, numbers]
+        Y = heart_df.iloc[:, -1]
+
+        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.25, random_state = 0)
+
+        st.subheader('User Input:')
+        st.write(user_input)
+        st.subheader('Model Test Accuracy Score:')
+
+        if (option == "Random Forest"):
+          prediction = RFC_fun(X_train, X_test, Y_train, Y_test)
+        elif (option == "Logistic Regression"):
+            prediction = LR_fun(X_train, X_test, Y_train, Y_test)
+        elif (option == "k-Nearest Neighbors"):
+            prediction = kN_fun(X_train, X_test, Y_train, Y_test)
+        elif (option == "Gradient Boosting"):
+            prediction = GBC_fun(X_train, X_test, Y_train, Y_test)
+
+        st.subheader('Classification result: ')
+        st.write('')
+        if (prediction == 0):
+            st.markdown("**Predicted that there is no cardiovascular disease.**")
+        else:
+            st.markdown("**Predicted that cardiovascular disease is present.**")
+
+        st.write(prediction)   
 
 #streamlit run "D:\4.godina\Projekti\rusu\model_heart_v2.py"
 
