@@ -5,7 +5,8 @@ import pandas as pd
 st.title("Cardiovascular disease prediction")
 
 st.write('')
-
+st.markdown("**To choose attributes, click on the arrow in the upper left corner of the screen**")
+st.write('')
 st.subheader("Data information: ")
 
 st.write("Systolic blood pressure is higher number.")
