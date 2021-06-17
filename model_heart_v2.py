@@ -13,7 +13,7 @@ st.write("Diastolic blood pressure is lower number.")
 st.write("Cholesterol levels are: 1 - normal, 2 - above normal, 3 - well above normal")
 st.write("Glucose levels are: 1 - normal, 2 - above normal, 3 - well above normal")
 
-st.sidebar.markdown("## Choose atributes")
+st.sidebar.markdown("## Choose attributes")
 
 def get_user_input():
     
