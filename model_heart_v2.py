@@ -178,28 +178,28 @@ st.write('')
 option = st.selectbox("Choose clasification algorithm", ("Logistic Regression", "Random Forest", "k-Nearest Neighbors", "Gradient Boosting"))
 button = st.button("Get prediction")
 
-def RFC_fun(X_train, X_test, Y_train, Y_test):
+def RFC_fun(X_train, X_test, Y_train, Y_test, user_input):
       RFC = RandomForestClassifier(n_estimators = 100, max_features = "log2")
       RFC.fit(X_train, Y_train)
       st.write(str(accuracy_score(Y_test, RFC.predict(X_test)) * 100) + '%')
       prediction = RFC.predict(user_input)
       return prediction
 
-def LR_fun(X_train, X_test, Y_train, Y_test):
+def LR_fun(X_train, X_test, Y_train, Y_test, user_input):
       LR = LogisticRegression()
       LR.fit(X_train, Y_train)
       st.write(str(accuracy_score(Y_test, LR.predict(X_test)) * 100) + '%')
       prediction = LR.predict(user_input)
       return prediction
     
-def kN_fun(X_train, X_test, Y_train, Y_test):
+def kN_fun(X_train, X_test, Y_train, Y_test, user_input):
     kN = KNeighborsClassifier(n_neighbors = 8)
     kN.fit(X_train, Y_train)
     st.write(str(accuracy_score(Y_test, kN.predict(X_test)) * 100) + '%')
     prediction = kN.predict(user_input)
     return prediction  
 
-def GBC_fun(X_train, X_test, Y_train, Y_test):
+def GBC_fun(X_train, X_test, Y_train, Y_test, user_input):
     Grad_Boosting = GradientBoostingClassifier( n_estimators = 100, max_depth = 1, learning_rate = 1,
                                            random_state = 0)
     Grad_Boosting.fit(X_train, Y_train) 
@@ -226,13 +226,13 @@ if button:
         st.subheader('Model Test Accuracy Score:')
 
         if (option == "Random Forest"):
-          prediction = RFC_fun(X_train, X_test, Y_train, Y_test)
+            prediction = RFC_fun(X_train, X_test, Y_train, Y_test, user_input)
         elif (option == "Logistic Regression"):
-            prediction = LR_fun(X_train, X_test, Y_train, Y_test)
+            prediction = LR_fun(X_train, X_test, Y_train, Y_test, user_input)
         elif (option == "k-Nearest Neighbors"):
-            prediction = kN_fun(X_train, X_test, Y_train, Y_test)
+            prediction = kN_fun(X_train, X_test, Y_train, Y_test, user_input)
         elif (option == "Gradient Boosting"):
-            prediction = GBC_fun(X_train, X_test, Y_train, Y_test)
+            prediction = GBC_fun(X_train, X_test, Y_train, Y_test, user_input)
 
         st.subheader('Classification result: ')
         st.write('')
@@ -243,7 +243,7 @@ if button:
 
         st.write(prediction)   
 
-#streamlit run "D:\4.godina\Projekti\rusu\model_heart_v2.py"
+
 
 
 
