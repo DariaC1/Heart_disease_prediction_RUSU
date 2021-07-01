@@ -193,7 +193,7 @@ def LR_fun(X_train, X_test, Y_train, Y_test, user_input):
       return prediction
     
 def kN_fun(X_train, X_test, Y_train, Y_test, user_input):
-    kN = KNeighborsClassifier(n_neighbors = 8)
+    kN = KNeighborsClassifier(n_neighbors = 40)
     kN.fit(X_train, Y_train)
     st.write(str(accuracy_score(Y_test, kN.predict(X_test)) * 100) + '%')
     prediction = kN.predict(user_input)
