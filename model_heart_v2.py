@@ -179,7 +179,7 @@ option = st.selectbox("Choose clasification algorithm", ("Logistic Regression", 
 button = st.button("Get prediction")
 
 def RFC_fun(X_train, X_test, Y_train, Y_test, user_input):
-      RFC = RandomForestClassifier(n_estimators = 120)
+      RFC = RandomForestClassifier(n_estimators = 120, max_depth = 10, min_samples_split = 10)
       RFC.fit(X_train, Y_train)
       st.write(str(accuracy_score(Y_test, RFC.predict(X_test)) * 100) + '%')
       prediction = RFC.predict(user_input)
